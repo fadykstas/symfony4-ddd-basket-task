@@ -1,0 +1,23 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Project "Fruit Basket API"
+            description: The purpose of the project is to implement a Fruit Basket API. It should contain "Basket" and "Item"
+                entities. The basket has id, name, max capacity and contents properties. Item has the type and weight
+                properties. Item type can be 'apple', 'orange' or 'watermelon' (in next version there will be more).
+            version: 1.0.0
+            author: StanFadeev
+#        securityDefinitions:
+#            api_key:
+#                type: apiKey
+#                description: Your Json Web Token
+#                name:  authorization
+#                in: header
+#        security:
+#            - api_key: []
+
+
+    areas: # to filter documented routes
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+#            - ^/oauth # Accepts routes under /oauth
