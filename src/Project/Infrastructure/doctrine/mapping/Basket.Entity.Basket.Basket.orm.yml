@@ -1,0 +1,27 @@
+App\Project\Domain\Basket\Entity\Basket\Basket:
+    type: entity
+    table: baskets
+    repositoryClass: App\Project\Infrastructure\Basket\BasketRepository
+    id:
+        id:
+            type: basket_id
+            generator:
+                strategy: NONE
+    embedded:
+        name:
+            class: App\Project\Domain\Basket\Entity\Basket\BasketName
+            columnPrefix: false
+        maxCapacity:
+            class: App\Project\Domain\Basket\Entity\Weight\Weight
+#            columnPrefix: true
+    oneToMany:
+        contents:
+            targetEntity: App\Project\Domain\Basket\Entity\Item\Item
+            cascade:
+                - remove
+                - persist
+                - refresh
+            fetch: EAGER
+            orphanRemoval: true
+            mappedBy: basket
+#    lifecycleCallbacks: {  }

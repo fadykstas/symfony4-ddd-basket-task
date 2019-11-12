@@ -1,0 +1,44 @@
+services:
+  App\Project\App\UseCases\Basket\GetBasketList\GetBasketListAction: '@project.use_cases.basket.action.get_basket_list'
+  App\Project\App\UseCases\Basket\GetBasket\GetBasketAction: '@project.use_cases.basket.action.get_basket'
+  App\Project\App\UseCases\Basket\AddBasket\AddBasketAction: '@project.use_cases.basket.action.add_basket'
+  App\Project\App\UseCases\Basket\RemoveBasket\RemoveBasketAction: '@project.use_cases.basket.action.remove_basket'
+  App\Project\App\UseCases\Basket\RenameBasket\RenameBasketAction: '@project.use_cases.basket.action.rename_basket'
+  App\Project\App\UseCases\Basket\AddItems\AddItemsAction: '@project.use_cases.basket.action.add_items'
+  App\Project\App\UseCases\Basket\RemoveItem\RemoveItemAction: '@project.use_cases.basket.action.remove_item'
+
+  ## UseCases
+  project.use_cases.basket.action.get_basket_list:
+    class: App\Project\App\UseCases\Basket\GetBasketList\GetBasketListAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.get_basket:
+    class: App\Project\App\UseCases\Basket\GetBasket\GetBasketAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.add_basket:
+    class: App\Project\App\UseCases\Basket\AddBasket\AddBasketAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.remove_basket:
+    class: App\Project\App\UseCases\Basket\RemoveBasket\RemoveBasketAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.rename_basket:
+    class: App\Project\App\UseCases\Basket\RenameBasket\RenameBasketAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.add_items:
+    class: App\Project\App\UseCases\Basket\AddItems\AddItemsAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']
+
+  project.use_cases.basket.action.remove_item:
+    class: App\Project\App\UseCases\Basket\RemoveItem\RemoveItemAction
+    arguments:
+      ['@project.infrastructure.repositories.basket']

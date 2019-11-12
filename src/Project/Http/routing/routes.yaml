@@ -1,0 +1,67 @@
+
+baskets.list:
+    path: "/api/baskets"
+    methods: GET
+    controller: App\Project\Http\Controller\BasketController:index
+
+baskets.get:
+    path: "/api/baskets/{id}"
+    methods: GET
+    controller: App\Project\Http\Controller\BasketController:getBasket
+
+baskets.add:
+    path: "/api/baskets"
+    methods: POST
+    controller: App\Project\Http\Controller\BasketController:addBasket
+
+baskets.remove:
+    path: "/api/baskets/{id}"
+    methods: DELETE
+    controller: App\Project\Http\Controller\BasketController:removeBasket
+
+baskets.rename:
+    path: "/api/baskets/{id}"
+    methods: PUT
+    controller: App\Project\Http\Controller\BasketController:renameBasket
+
+baskets.items.add:
+    path: "/api/baskets/{basketId}/items"
+    methods: POST
+    controller: App\Project\Http\Controller\ItemController:addItems
+
+baskets.items.remove:
+    path: "/api/baskets/{basketId}/items"
+    methods: DELETE
+    controller: App\Project\Http\Controller\ItemController:removeItem
+
+#
+#articles.get:
+#    path: "/api/articles"
+#    methods: GET
+#    controller: App\Project\Http\Controller\ArticleController:index
+#
+#articles.get.by.id:
+#    path: "/api/article/{id}"
+#    methods: GET
+#    controller: App\Project\Http\Controller\ArticleController:article
+#
+#articles.create:
+#    path: "/api/articles"
+#    methods: POST
+#    controller: App\Project\Http\Controller\ArticleController:create
+#
+#users.get:
+#    path: "/api/users"
+#    methods: GET
+#    controller: App\Project\Http\Controller\UserController:index
+#
+#users.get.by.id:
+#    path: "/api/user/{id}"
+#    methods: GET
+#    controller: App\Project\Http\Controller\UserController:user
+#
+#
+#project.search:
+#    path: "/api/search"
+#    methods: GET
+#    controller: App\Project\Http\Controller\SearchController:index

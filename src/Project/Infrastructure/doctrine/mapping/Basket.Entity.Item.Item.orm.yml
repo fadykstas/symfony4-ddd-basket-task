@@ -1,0 +1,24 @@
+App\Project\Domain\Basket\Entity\Item\Item:
+    type: entity
+    table: items
+    repositoryClass: App\Project\Infrastructure\Basket\ItemRepository
+    id:
+        id:
+            type: item_id
+            generator:
+                strategy: NONE
+    embedded:
+        weight:
+            class: App\Project\Domain\Basket\Entity\Weight\Weight
+            columnPrefix: false
+        type:
+            class: App\Project\Domain\Basket\Entity\Item\ItemType
+            columnPrefix: false
+    manyToOne:
+        basket:
+            targetEntity: App\Project\Domain\Basket\Entity\Basket\Basket
+            inversedBy: contents
+            joinColumn:
+                name: basket_id
+                referencedColumnName: id
+#    lifecycleCallbacks: {  }

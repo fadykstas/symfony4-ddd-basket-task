@@ -1,0 +1,65 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+    siteUrl: 'http://127.0.0.1:9002/api'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+#    # makes classes in src/ available to be used as services
+#    # this creates a service per class whose id is the fully-qualified class name
+#    App\:
+#        resource: '../src/*'
+#        exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+#
+#    # controllers are imported separately to make sure services can be injected
+#    # as action arguments even if you don't extend any base controller class
+    App\Project\Http\Controller\:
+        resource: '../src/Project/Http/Controller'
+        tags: ['controller.service_arguments']
+
+    ## Register commands
+    App\Project\Console\:
+        resource: '../src/Project/Console'
+
+    App\Authorization\Console\:
+        resource: '../src/Authorization/Console'
+
+    ## Fixtures
+    App\DataFixtures\:
+        resource: '../src/DataFixtures'
+        tags: ['doctrine.fixture.orm']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    ## here will be project's services
+    project.event_listener.api_exception:
+      class: App\Project\App\EventListener\ApiExceptionListener
+      arguments: ['%%kernel.debug%%']
+      tags:
+        - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+
+    ## make fos oauth service public
+    fos_oauth_server.client_manager.default:
+      class: FOS\OAuthServerBundle\Entity\ClientManager
+      public: true
+      arguments: ['@Doctrine\ORM\EntityManagerInterface','%fos_oauth_server.model.client.class%']
+
+    FOS\OAuthServerBundle\Model\AccessTokenManagerInterface:
+      alias: fos_oauth_server.access_token_manager.default
+
+
+imports:
+  - { resource: "../src/Project/Http/Presenter/presenters.yml"}
+  - { resource: "../src/Project/App/UseCases/useCases.yml"}
+  - { resource: "../src/Project/Infrastructure/repositories.yml"}
+
+

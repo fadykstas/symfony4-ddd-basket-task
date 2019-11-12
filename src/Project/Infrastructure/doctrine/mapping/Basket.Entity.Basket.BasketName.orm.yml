@@ -1,0 +1,6 @@
+App\Project\Domain\Basket\Entity\Basket\BasketName:
+    type: embeddable
+    fields:
+        name:
+            type: string
+            nullable: false

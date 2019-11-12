@@ -1,0 +1,13 @@
+services:
+  App\Project\Http\Presenter\Basket\JsonBasketPresenter: '@project.http.presenter.basket.json_basket_presenter'
+  App\Project\Http\Presenter\Basket\JsonItemPresenter: '@project.http.presenter.basket.json_item_presenter'
+
+
+  ## Presenters
+  project.http.presenter.basket.json_basket_presenter:
+    class: App\Project\Http\Presenter\Basket\JsonBasketPresenter
+    arguments:
+      ['@project.http.presenter.basket.json_item_presenter']
+
+  project.http.presenter.basket.json_item_presenter:
+    class: App\Project\Http\Presenter\Basket\JsonItemPresenter

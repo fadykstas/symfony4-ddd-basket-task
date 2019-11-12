@@ -1,0 +1,7 @@
+services:
+
+  ## Repositories
+  project.infrastructure.repositories.basket:
+    class: App\Project\Infrastructure\Basket\DoctrineSQLBasketRepository
+    arguments:
+      ['@doctrine']
