@@ -7,39 +7,19 @@ namespace App\Project\Domain\Basket\Entity\Item;
 use App\Project\Domain\Basket\Entity\Basket\Basket;
 use App\Project\Domain\Basket\Entity\Weight\Weight;
 
-class Item
+class ItemDTO
 {
     private $id;
     private $type;
     private $weight;
     private $basket;
 
-    public function __construct(ItemId $id, ItemType $type, Weight $weight, Basket $basket)
+    public function __construct(ItemId $id, ItemType $type, Weight $weight, Basket $basket = null)
     {
         $this->id = $id;
         $this->type = $type;
         $this->weight = $weight;
         $this->basket = $basket;
-    }
-
-    public static function createFromDTO(ItemDTO $dto): Item
-    {
-        return new self(
-            $dto->id(),
-            $dto->type(),
-            $dto->weight(),
-            $dto->basket()
-        );
-    }
-
-    public function convertToDTO(): ItemDTO
-    {
-        return new ItemDTO(
-            $this->id(),
-            $this->type(),
-            $this->weight(),
-            $this->basket()
-        );
     }
 
     public function id(): ItemId
@@ -55,16 +35,6 @@ class Item
     public function weight(): Weight
     {
         return $this->weight;
-    }
-
-    public function addWeight(Weight $weight): void
-    {
-        $this->weight = $this->weight->add($weight);
-    }
-
-    public function deductWeight(Weight $weight): void
-    {
-        $this->weight = $this->weight->deduct($weight);
     }
 
     public function basket(): Basket

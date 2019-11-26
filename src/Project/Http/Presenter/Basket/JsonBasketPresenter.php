@@ -4,7 +4,7 @@ namespace App\Project\Http\Presenter\Basket;
 
 use App\Project\App\Support\ExtendedArrayCollection;
 use App\Project\Domain\Basket\Entity\Basket\Basket;
-use App\Project\Domain\Basket\Entity\Item\Item;
+use App\Project\Domain\Basket\Entity\Item\ItemDTO;
 
 class JsonBasketPresenter
 {
@@ -30,7 +30,7 @@ class JsonBasketPresenter
             "id" => $basket->id()->id(),
             "name" => $basket->name()->name(),
             "maxCapacity" => $basket->maxCapacity()->weight(),
-            "contents" => $basket->contents()->map(function (Item $item) {
+            "contents" => $basket->contents()->map(function (ItemDTO $item) {
                 return $this->jsonItemPresenter->presentItemShort($item);
             })->getValues()
         ];

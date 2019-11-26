@@ -2,11 +2,11 @@
 
 namespace App\Project\Http\Presenter\Basket;
 
-use App\Project\Domain\Basket\Entity\Item\Item;
+use App\Project\Domain\Basket\Entity\Item\ItemDTO;
 
 class JsonItemPresenter
 {
-    public function presentItemFull(Item $item): array
+    public function presentItemFull(ItemDTO $item): array
     {
         $result = [
             "id" => $item->id()->id(),
@@ -18,7 +18,7 @@ class JsonItemPresenter
         return $result;
     }
 
-    public function presentItemShort(Item $item): array
+    public function presentItemShort(ItemDTO $item): array
     {
         $result = [
             "id" => $item->id()->id(),

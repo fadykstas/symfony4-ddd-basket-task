@@ -5,6 +5,7 @@ namespace App\Project\App\UseCases\Basket\RemoveItem;
 
 
 use App\Project\Domain\Basket\Contract\BasketRepositoryInterface;
+use App\Project\Domain\Basket\Entity\Item\ItemDTO;
 
 
 class RemoveItemAction
@@ -19,8 +20,9 @@ class RemoveItemAction
     public function execute(RemoveItemRequest $itemsRequest): RemoveItemResponse
     {
         $basket = $this->basketRepository->getById($itemsRequest->basketId());
+        /** @var ItemDTO $item */
         $item = $basket->getItemByType($itemsRequest->itemType());
-        $basket->removeContent($item);
+        $basket->removeContent($item->id());
 
         $this->basketRepository->save($basket);
         $basket = $this->basketRepository->getById($basket->id());

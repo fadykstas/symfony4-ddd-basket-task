@@ -7,6 +7,7 @@ use App\Project\Domain\Basket\Exceptions\Item\ItemIdNotValidException;
 use Ramsey\Uuid\Exception\InvalidUuidStringException;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Exception;
 
 class ItemId
 {
@@ -15,6 +16,11 @@ class ItemId
     private function __construct(UuidInterface $uuid)
     {
         $this->id = $uuid;
+    }
+
+    public function equals(ItemId $id): bool
+    {
+        return $this->id() === $id->id();
     }
 
     public function __toString(): string
@@ -29,7 +35,11 @@ class ItemId
 
     public static function generate(): ItemId
     {
-        return new self(Uuid::uuid4());
+        try {
+            return new self(Uuid::uuid4());
+        } catch (Exception $e) {
+            throw new ItemIdNotValidException();
+        }
     }
 
     public static function fromString(string $itemId): ItemId
